@@ -1,0 +1,8 @@
+target/
+*/target/
+*/classes/
+*.jar
+*.class
+*.iml
+*/application-test.properties
+*/application-prod.properties

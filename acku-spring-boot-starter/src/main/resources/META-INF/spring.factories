@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ io.xream.acku.AckuStarter,\
+ io.xream.acku.backend.AckuBackendImpl
+
