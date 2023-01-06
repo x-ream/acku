@@ -33,7 +33,7 @@ public class AuthorizationBusiness {
     @Value("acku.dashboard.authorization.required")
     private String authorizationRequired;
 
-    @Value("acku.dashboard.authorization.url.redirect-to-signIn")
+    @Value("acku.dashboard.authorization.url.redirect-to-sign-in")
     private String urlRedirectToSignIn = "NONE";
 
     @Value("acku.dashboard.authorization.url.server")
