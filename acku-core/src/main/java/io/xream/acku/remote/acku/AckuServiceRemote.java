@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author Sim
  */
-@ReyClient("http://${reliable.app}/message" )
+@ReyClient("http://${acku.app}/message" )
 public interface AckuServiceRemote {
 
     @RequestMapping("/create")

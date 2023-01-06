@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Sim
  */
-@ReyClient("http://${reliable.app}/failed" )
+@ReyClient("http://${acku.app}/failed" )
 public interface FailedServiceRemote {
 
 

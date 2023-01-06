@@ -68,8 +68,8 @@ public class ScheduleAckuController {
     private NextBusiness nextBusiness;
 
 
-    @Value("${Acku.retry.duration:'5000'}")
-    private long AckuRetryDuration;
+    @Value("${acku.retry.duration:5000}")
+    private long ackuRetryDuration;
 
     private long checkStatusDuration = 1400;
 
@@ -184,7 +184,7 @@ public class ScheduleAckuController {
     @RequestMapping(value = "/listForRetry", method = RequestMethod.GET)
     public List<AckuMessage> listForRetry() {
 
-        long rrd = AckuRetryDuration < 5000 ? 5000 : AckuRetryDuration;
+        long rrd = ackuRetryDuration < 5000 ? 5000 : ackuRetryDuration;
 
         long now = System.currentTimeMillis();
         final long sendAt = now - rrd;
