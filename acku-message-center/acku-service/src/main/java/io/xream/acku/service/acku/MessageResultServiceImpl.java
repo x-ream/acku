@@ -62,5 +62,4 @@ public class MessageResultServiceImpl implements MessageResultService {
         return this.repository.list(q);
     }
 
-
 }
