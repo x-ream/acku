@@ -19,12 +19,12 @@ package io.xream.acku.repository.acku;
 
 import io.xream.acku.bean.entity.AckuMessage;
 import io.xream.sqli.api.BaseRepository;
-import io.xream.sqli.api.ResultMapRepository;
+import io.xream.sqli.api.RepositoryX;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author Sim
  */
 @Repository
-public interface AckuMessageRepository extends BaseRepository<AckuMessage>, ResultMapRepository {
+public interface AckuMessageRepository extends BaseRepository<AckuMessage>, RepositoryX {
 }

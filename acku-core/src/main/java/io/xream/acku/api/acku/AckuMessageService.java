@@ -17,8 +17,8 @@
 package io.xream.acku.api.acku;
 
 import io.xream.acku.bean.entity.AckuMessage;
-import io.xream.sqli.builder.Criteria;
-import io.xream.sqli.builder.RefreshCondition;
+import io.xream.sqli.builder.Q;
+import io.xream.sqli.builder.Qr;
 
 import java.util.List;
 import java.util.Map;
@@ -29,12 +29,12 @@ import java.util.Map;
 public interface AckuMessageService {
 
     boolean create(AckuMessage message);
-    boolean refresh(RefreshCondition<AckuMessage> condition);
+    boolean refresh(Qr<AckuMessage> condition);
     boolean remove(String id);
 
-    List<AckuMessage> listByCriteria(Criteria criteria);
+    List<AckuMessage> listByCond(Q criteria);
 
-    List<Map<String,Object>> listByResultMap(Criteria.ResultMapCriteria ResultMapCriteria);
+    List<Map<String,Object>> listByX(Q.X x);
 
     AckuMessage get(String msgId);
 }

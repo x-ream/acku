@@ -16,8 +16,8 @@
  */
 package io.xream.acku.bean.dto;
 
-import io.xream.acku.bean.entity.MessageResult;
 import io.xream.acku.bean.entity.AckuMessage;
+import io.xream.acku.bean.entity.MessageResult;
 import io.xream.acku.interner.MessageTraceable;
 
 import java.io.Serializable;

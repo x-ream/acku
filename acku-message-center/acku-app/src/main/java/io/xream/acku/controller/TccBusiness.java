@@ -16,14 +16,14 @@
  */
 package io.xream.acku.controller;
 
-import io.xream.internal.util.JsonX;
 import io.xream.acku.TCCTopic;
 import io.xream.acku.api.acku.AckuMessageService;
 import io.xream.acku.bean.constant.MessageStatus;
 import io.xream.acku.bean.dto.AckuDto;
 import io.xream.acku.bean.entity.AckuMessage;
 import io.xream.acku.produce.Producer;
-import io.xream.sqli.builder.RefreshBuilder;
+import io.xream.internal.util.JsonX;
+import io.xream.sqli.builder.QrB;
 import io.xream.x7.base.GenericObject;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +45,7 @@ public class TccBusiness {
         Date date = new Date();
 
         boolean flag = ackuMessageService.refresh(
-                RefreshBuilder.builder()
+                QrB.of(AckuMessage.class)
                         .refresh("status", MessageStatus.OK)
                         .refresh("refreshAt", date)
                         .refresh("tcc", TCCTopic._TCC_CONFIRM)
@@ -88,7 +88,7 @@ public class TccBusiness {
         Date date = new Date();
 
         boolean flag = ackuMessageService.refresh(
-                RefreshBuilder.builder()
+                QrB.of(AckuMessage.class)
                         .refresh("status", MessageStatus.FAIL)
                         .refresh("refreshAt", date)
                         .refresh("tcc", TCCTopic._TCC_CANCEL)

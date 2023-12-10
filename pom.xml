@@ -9,18 +9,17 @@
     <artifactId>acku</artifactId>
     <name>acku</name>
     <packaging>pom</packaging>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <description>http://acku.xream.io</description>
     <url>http://acku.xream.io</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
         <maven.test.skip>true</maven.test.skip>
-        <x7.boot.version>2.18.0.RELEASE</x7.boot.version>
-        <rey.boot.version>1.3.0.RELEASE</rey.boot.version>
+        <x7.boot.version>3.1.5</x7.boot.version>
     </properties>
 
     <modules>
@@ -34,7 +33,7 @@
         <connection>scm:git:https://github.com/x-ream/acku</connection>
         <developerConnection>scm:git:https://github.com/x-ream/acku</developerConnection>
         <url>scm:git:https://github.com/x-ream/acku</url>
-        <tag>0.1.0</tag>
+        <tag>0.2.0</tag>
     </scm>
 
     <licenses>
@@ -71,7 +70,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.6.13</version>
+                <version>3.1.5</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -87,11 +86,6 @@
             <version>${x7.boot.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.xream.rey</groupId>
-            <artifactId>rey-spring-boot-starter</artifactId>
-            <version>${rey.boot.version}</version>
-        </dependency>
     </dependencies>
 
 

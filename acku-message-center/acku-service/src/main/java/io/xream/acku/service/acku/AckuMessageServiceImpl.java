@@ -19,8 +19,8 @@ package io.xream.acku.service.acku;
 import io.xream.acku.api.acku.AckuMessageService;
 import io.xream.acku.bean.entity.AckuMessage;
 import io.xream.acku.repository.acku.AckuMessageRepository;
-import io.xream.sqli.builder.Criteria;
-import io.xream.sqli.builder.RefreshCondition;
+import io.xream.sqli.builder.Q;
+import io.xream.sqli.builder.Qr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +42,7 @@ public class AckuMessageServiceImpl implements AckuMessageService {
     }
 
     @Override
-    public boolean refresh(RefreshCondition<AckuMessage> refreshCondition) {
+    public boolean refresh(Qr<AckuMessage> refreshCondition) {
         return this.repository.refresh(refreshCondition);
     }
 
@@ -52,13 +52,13 @@ public class AckuMessageServiceImpl implements AckuMessageService {
     }
 
     @Override
-    public List<AckuMessage> listByCriteria(Criteria criteria) {
-        return this.repository.list(criteria);
+    public List<AckuMessage> listByCond(Q q) {
+        return this.repository.list(q);
     }
 
     @Override
-    public List<Map<String, Object>> listByResultMap(Criteria.ResultMapCriteria ResultMapCriteria) {
-        return this.repository.list(ResultMapCriteria);
+    public List<Map<String, Object>> listByX(Q.X x) {
+        return this.repository.listX(x);
     }
 
     @Override

@@ -16,9 +16,7 @@
  */
 package io.xream.acku;
 
-import io.xream.x7.EnableCorsConfig;
 import io.xream.x7.EnableDateToLongForJackson;
-import io.xream.rey.EnableReyClient;
 import io.xream.x7.EnableX7Repository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,8 +29,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableX7Repository(baseTypeSupported = true)
 @EnableDateToLongForJackson
-@EnableReyClient
-@EnableCorsConfig
 public class App {
 
 	

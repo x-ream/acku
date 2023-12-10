@@ -16,16 +16,16 @@
  */
 package io.xream.acku.controller;
 
-import io.xream.internal.util.JsonX;
 import io.xream.acku.api.acku.AckuMessageService;
 import io.xream.acku.bean.constant.MessageStatus;
 import io.xream.acku.bean.dto.AckuDto;
 import io.xream.acku.bean.entity.AckuMessage;
 import io.xream.acku.bean.exception.AckuExceptioin;
 import io.xream.acku.produce.Producer;
-import io.xream.sqli.builder.Criteria;
-import io.xream.sqli.builder.CriteriaBuilder;
-import io.xream.sqli.builder.RefreshBuilder;
+import io.xream.internal.util.JsonX;
+import io.xream.sqli.builder.Q;
+import io.xream.sqli.builder.QB;
+import io.xream.sqli.builder.QrB;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,18 +42,18 @@ public class NextBusiness {
     @Transactional
     public boolean produce(String parentId, AckuMessageService AckuMessageService, Producer producer){
 
-        CriteriaBuilder builder = CriteriaBuilder.builder(AckuMessage.class);
-        builder.and().eq("parentId",parentId);
-        builder.and().eq("status",MessageStatus.NEXT);
-        Criteria criteria = builder.build();
+        QB builder = QB.of(AckuMessage.class);
+        builder.eq("parentId",parentId);
+        builder.eq("status",MessageStatus.NEXT);
+        Q q = builder.build();
 
-        List<AckuMessage> list = AckuMessageService.listByCriteria(criteria);
+        List<AckuMessage> list = AckuMessageService.listByCond(q);
 
         Date date = new Date();
 
         for (AckuMessage AckuMessage : list) {
             AckuMessageService.refresh(
-                    RefreshBuilder.builder().refresh("status",MessageStatus.SEND)
+                    QrB.of(AckuMessage.class).refresh("status",MessageStatus.SEND)
                             .refresh("sendAt",date.getTime())
                             .refresh("refreshAt", date)
                             .eq("id", AckuMessage.getId()).build()

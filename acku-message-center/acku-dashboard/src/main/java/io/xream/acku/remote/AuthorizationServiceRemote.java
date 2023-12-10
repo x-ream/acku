@@ -16,14 +16,14 @@
  */
 package io.xream.acku.remote;
 
-import io.xream.rey.annotation.ReyClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.service.annotation.HttpExchange;
 
 /**
  * @author Sim
  */
-@ReyClient("http://${acku.dashboard.authorization.url.server}" )
+@HttpExchange("http://${acku.dashboard.authorization.url.server}" )
 public interface AuthorizationServiceRemote {
 
     @RequestMapping(value = "/{token}/{userId}", method = RequestMethod.GET)

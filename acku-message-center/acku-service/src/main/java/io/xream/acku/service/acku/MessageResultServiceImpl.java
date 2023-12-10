@@ -20,8 +20,8 @@ import io.xream.acku.api.acku.MessageResultService;
 import io.xream.acku.bean.entity.MessageResult;
 import io.xream.acku.repository.acku.MessageResultRepository;
 import io.xream.sqli.api.NativeRepository;
-import io.xream.sqli.builder.Criteria;
-import io.xream.sqli.builder.RefreshCondition;
+import io.xream.sqli.builder.Q;
+import io.xream.sqli.builder.Qr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class MessageResultServiceImpl implements MessageResultService {
         return true;
     }
 
-    public boolean refresh(RefreshCondition<MessageResult> condition) {
+    public boolean refresh(Qr<MessageResult> condition) {
         return this.repository.refresh(condition);
     }
 
@@ -58,8 +58,8 @@ public class MessageResultServiceImpl implements MessageResultService {
     }
 
     @Override
-    public List<MessageResult> listByCriteria(Criteria criteria) {
-        return this.repository.list(criteria);
+    public List<MessageResult> listByCond(Q q) {
+        return this.repository.list(q);
     }
 
 

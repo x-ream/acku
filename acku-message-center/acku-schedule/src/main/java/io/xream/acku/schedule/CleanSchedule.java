@@ -18,13 +18,12 @@ package io.xream.acku.schedule;
 
 import io.xream.acku.codetemplate.ScheduleTemplate;
 import io.xream.acku.remote.ScheduledAckuServiceRemote;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
-
-import javax.annotation.Resource;
 
 
 /**

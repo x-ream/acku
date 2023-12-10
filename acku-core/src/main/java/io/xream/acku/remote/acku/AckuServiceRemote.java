@@ -16,16 +16,16 @@
  */
 package io.xream.acku.remote.acku;
 
-import io.xream.acku.bean.dto.ConsumedAckuDto;
 import io.xream.acku.bean.dto.AckuDto;
-import io.xream.rey.annotation.ReyClient;
+import io.xream.acku.bean.dto.ConsumedAckuDto;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.service.annotation.HttpExchange;
 
 
 /**
  * @author Sim
  */
-@ReyClient("http://${acku.app}/message" )
+@HttpExchange("http://${acku.app}/message" )
 public interface AckuServiceRemote {
 
     @RequestMapping("/create")

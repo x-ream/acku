@@ -17,8 +17,8 @@
 package io.xream.acku.api.acku;
 
 import io.xream.acku.bean.entity.MessageResult;
-import io.xream.sqli.builder.Criteria;
-import io.xream.sqli.builder.RefreshCondition;
+import io.xream.sqli.builder.Q;
+import io.xream.sqli.builder.Qr;
 
 import java.util.List;
 
@@ -28,9 +28,9 @@ import java.util.List;
 public interface MessageResultService {
 
     boolean create(MessageResult result);
-    boolean refresh(RefreshCondition<MessageResult> condition);
+    boolean refresh(Qr<MessageResult> qr);
 
     boolean removeByMessageId(String id);
 
-    List<MessageResult> listByCriteria(Criteria criteria);
+    List<MessageResult> listByCond(Q q);
 }

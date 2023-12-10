@@ -19,16 +19,16 @@ package io.xream.acku.controller;
 
 import io.xream.acku.bean.entity.AckuMessage;
 import io.xream.acku.remote.acku.FailedServiceRemote;
-import io.xream.x7.base.web.ViewEntity;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -48,61 +48,61 @@ public class MessageFailedController {
     private AuthorizationBusiness authorizationBusiness;
 
     @RequestMapping(value = "/find",method = RequestMethod.GET)
-    public ViewEntity find() {
+    public ResponseEntity find() {
         return this.find(null,null);
     }
     @RequestMapping(value = "/retry/all",method = RequestMethod.GET)
-    public ViewEntity retryAll() {
+    public ResponseEntity retryAll() {
         return this.retryAll(null,null);
     }
     @RequestMapping(value = "/retry/{messageId}",method = RequestMethod.GET)
-    public ViewEntity retry(@PathVariable String messageId) {
+    public ResponseEntity retry(@PathVariable String messageId) {
         return this.retry(messageId,null,null);
     }
 
 
     @RequestMapping(value = "/find/{token}/{userId}",method = RequestMethod.GET)
-    public ViewEntity find(@PathVariable String token, @PathVariable String userId) {
+    public ResponseEntity find(@PathVariable String token, @PathVariable String userId) {
 
         if (! authorizationBusiness.isAccessble(token,userId)) {
             String redirect = this.authorizationBusiness.getRedirect();
-            return ViewEntity.toast(redirect);
+            return ResponseEntity.ok(redirect);
         }
 
         List<AckuMessage> list = this.failedServiceRemote.findFailed();
 
-        return ViewEntity.ok(list);
+        return ResponseEntity.ok(list);
     }
 
 
     @RequestMapping(value = "/retry/all/{token}/{userId}",method = RequestMethod.GET)
-    public ViewEntity retryAll(@PathVariable String token, @PathVariable String userId) {
+    public ResponseEntity retryAll(@PathVariable String token, @PathVariable String userId) {
 
         logger.info("retry all failed message");
 
         if (! authorizationBusiness.isAccessble(token,userId)) {
             String redirect = this.authorizationBusiness.getRedirect();
-            return ViewEntity.toast(redirect);
+            return ResponseEntity.ok(redirect);
         }
 
         this.failedServiceRemote.retryAll();
 
-        return ViewEntity.ok("all");
+        return ResponseEntity.ok("all");
     }
 
 
     @RequestMapping(value = "/retry/{messageId}/{token}/{userId}",method = RequestMethod.GET)
-    public ViewEntity retry(@PathVariable String messageId, @PathVariable String token, @PathVariable String userId) {
+    public ResponseEntity retry(@PathVariable String messageId, @PathVariable String token, @PathVariable String userId) {
 
         logger.info("retry failed message: " + messageId);
 
         if (! authorizationBusiness.isAccessble(token,userId)) {
             String redirect = this.authorizationBusiness.getRedirect();
-            return ViewEntity.toast(redirect);
+            return ResponseEntity.ok(redirect);
         }
 
         this.failedServiceRemote.retry(messageId);
 
-        return ViewEntity.ok(messageId);
+        return ResponseEntity.ok(messageId);
     }
 }

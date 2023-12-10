@@ -16,9 +16,7 @@
  */
 package io.xream.acku;
 
-import io.xream.x7.EnableCorsConfig;
 import io.xream.x7.EnableDateToLongForJackson;
-import io.xream.rey.EnableReyClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -29,8 +27,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableDateToLongForJackson
-@EnableReyClient
-@EnableCorsConfig
 @EnableScheduling
 public class App {
 	

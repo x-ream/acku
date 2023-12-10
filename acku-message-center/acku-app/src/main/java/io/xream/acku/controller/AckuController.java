@@ -16,26 +16,26 @@
  */
 package io.xream.acku.controller;
 
-import io.xream.internal.util.JsonX;
-import io.xream.internal.util.StringUtil;
 import io.xream.acku.TCCTopic;
-import io.xream.acku.api.acku.MessageResultService;
 import io.xream.acku.api.acku.AckuMessageService;
+import io.xream.acku.api.acku.MessageResultService;
 import io.xream.acku.bean.constant.MessageStatus;
-import io.xream.acku.bean.dto.ConsumedAckuDto;
 import io.xream.acku.bean.dto.AckuDto;
-import io.xream.acku.bean.entity.MessageResult;
+import io.xream.acku.bean.dto.ConsumedAckuDto;
 import io.xream.acku.bean.entity.AckuMessage;
+import io.xream.acku.bean.entity.MessageResult;
 import io.xream.acku.bean.exception.AckuExceptioin;
 import io.xream.acku.produce.Producer;
-import io.xream.sqli.builder.RefreshBuilder;
+import io.xream.internal.util.JsonX;
+import io.xream.internal.util.StringUtil;
+import io.xream.sqli.builder.QrB;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -126,7 +126,7 @@ public class AckuController {
         AckuMessage.setStatus(MessageStatus.SEND.toString());
 
         boolean flag = this.AckuMessageService.refresh(
-                RefreshBuilder.builder()
+                QrB.of(AckuMessage.class)
                         .refresh("status",AckuMessage.getStatus())
                         .refresh("sendAt", AckuMessage.getSendAt())
                         .refresh("refreshAt", AckuMessage.getRefreshAt())
@@ -161,7 +161,7 @@ public class AckuController {
         if (StringUtil.isNotNull(resultId)) {
 
             boolean flag = this.messageResultService.refresh(
-                    RefreshBuilder.builder()
+                    QrB.of(MessageResult.class)
                             .refresh("status", dto.getTcc())
                             .refresh("refreshAt", date)
                             .eq("id", resultId).eq("status", MessageStatus.BLANK).build()
@@ -190,7 +190,7 @@ public class AckuController {
         }
 
         return this.AckuMessageService.refresh(
-                RefreshBuilder.builder()
+                QrB.of(AckuMessage.class)
                         .refresh("svcDone = CONCAT(svcDone, ? , '" + io.xream.acku.controller.TccBusiness.SVC_DONE_PREFIX +"' )", svc)
                         .refresh("refreshAt", date)
                         .eq("id", msgId)

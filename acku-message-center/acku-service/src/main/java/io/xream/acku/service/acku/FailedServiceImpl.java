@@ -19,8 +19,8 @@ package io.xream.acku.service.acku;
 import io.xream.acku.api.acku.FailedService;
 import io.xream.acku.bean.entity.AckuMessage;
 import io.xream.acku.repository.acku.AckuMessageRepository;
-import io.xream.sqli.builder.Criteria;
-import io.xream.sqli.builder.RefreshCondition;
+import io.xream.sqli.builder.Q;
+import io.xream.sqli.builder.Qr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,17 +37,17 @@ public class FailedServiceImpl implements FailedService {
     private AckuMessageRepository ackuMessageRepository;
 
     @Override
-    public boolean refresh(RefreshCondition<AckuMessage> condition) {
+    public boolean refresh(Qr<AckuMessage> condition) {
         return this.ackuMessageRepository.refresh(condition);
     }
 
     @Override
-    public boolean refreshUnSafe(RefreshCondition<AckuMessage> condition) {
+    public boolean refreshUnSafe(Qr<AckuMessage> condition) {
         return this.ackuMessageRepository.refreshUnSafe(condition);
     }
 
     @Override
-    public List<Map<String, Object>> listByResultMap(Criteria.ResultMapCriteria ResultMapCriteria) {
-        return this.ackuMessageRepository.list(ResultMapCriteria);
+    public List<Map<String, Object>> listByX(Q.X x) {
+        return this.ackuMessageRepository.listX(x);
     }
 }

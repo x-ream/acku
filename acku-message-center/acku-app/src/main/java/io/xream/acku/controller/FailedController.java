@@ -2,10 +2,11 @@ package io.xream.acku.controller;
 
 import io.xream.acku.api.acku.FailedService;
 import io.xream.acku.bean.constant.MessageStatus;
-import io.xream.sqli.builder.Criteria;
-import io.xream.sqli.builder.CriteriaBuilder;
+import io.xream.acku.bean.entity.AckuMessage;
 import io.xream.sqli.builder.Direction;
-import io.xream.sqli.builder.RefreshBuilder;
+import io.xream.sqli.builder.Q;
+import io.xream.sqli.builder.QB;
+import io.xream.sqli.builder.QrB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,15 +30,14 @@ public class FailedController {
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public List<Map<String,Object>> findFailed() {
 
-        CriteriaBuilder.ResultMapBuilder builder = CriteriaBuilder.resultMapBuilder();
-        builder.resultKey("id").resultKey("status").resultKey("retryMax").resultKey("topic");
-        builder.and().eq("status", MessageStatus.FAIL);
-        builder.and().gt("retryMax", 0);
+        QB.X builder = QB.x();
+        builder.select("id","status","retryMax","topic").from(AckuMessage.class);
+        builder.eq("status", MessageStatus.FAIL).gt("retryMax", 0);
         builder.sort("topic", Direction.DESC);
 
-        Criteria.ResultMapCriteria criteria = builder.build();
+        Q.X x = builder.build();
 
-        List<Map<String,Object>> mapList = this.failedService.listByResultMap(criteria);
+        List<Map<String,Object>> mapList = this.failedService.listByX(x);
 
         return mapList;
     }
@@ -45,15 +45,13 @@ public class FailedController {
     @RequestMapping(value = "/find/{topic}", method = RequestMethod.GET)
     public List<Map<String,Object>> findFailedByTopic(@PathVariable String topic) {
 
-        CriteriaBuilder.ResultMapBuilder builder = CriteriaBuilder.resultMapBuilder();
-        builder.resultKey("id").resultKey("status").resultKey("retryMax").resultKey("topic");
-        builder.and().eq("status", MessageStatus.FAIL);
-        builder.and().eq("topic",topic);
-        builder.and().gt("retryMax", 0);
+        QB.X builder = QB.x();
+        builder.select("id","status","retryMax","topic").from(AckuMessage.class);
+        builder.eq("status", MessageStatus.FAIL).eq("topic",topic).gt("retryMax", 0);
 
-        Criteria.ResultMapCriteria criteria = builder.build();
+        Q.X x = builder.build();
 
-        List<Map<String,Object>> mapList = this.failedService.listByResultMap(criteria);
+        List<Map<String,Object>> mapList = this.failedService.listByX(x);
 
         return mapList;
     }
@@ -62,7 +60,8 @@ public class FailedController {
     public boolean retryAll(){
 
         return this.failedService.refreshUnSafe(
-                RefreshBuilder.builder().refresh("status",MessageStatus.SEND).refresh("retryCount",0)
+                QrB.of(AckuMessage.class).refresh("status",MessageStatus.SEND)
+                        .refresh("retryCount",0)
                         .eq("status",MessageStatus.FAIL).gt("retryMax",0).build()
         );
     }
@@ -71,7 +70,7 @@ public class FailedController {
     public boolean retry(@PathVariable String messageId){
 
         return this.failedService.refresh(
-                RefreshBuilder.builder().refresh("status",MessageStatus.SEND)
+                QrB.of(AckuMessage.class).refresh("status",MessageStatus.SEND)
                         .refresh("retryCount",0)
                         .eq("id",messageId).build()
         );

@@ -1,9 +1,9 @@
 package io.xream.acku.remote.acku;
 
 import io.xream.acku.bean.entity.AckuMessage;
-import io.xream.rey.annotation.ReyClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.service.annotation.HttpExchange;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Sim
  */
-@ReyClient("http://${acku.app}/failed" )
+@HttpExchange("http://${acku.app}/failed" )
 public interface FailedServiceRemote {
 
 
