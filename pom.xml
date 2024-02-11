@@ -19,7 +19,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
         <maven.test.skip>true</maven.test.skip>
-        <x7.boot.version>3.1.5</x7.boot.version>
+        <x7.boot.version>3.1.6</x7.boot.version>
     </properties>
 
     <modules>

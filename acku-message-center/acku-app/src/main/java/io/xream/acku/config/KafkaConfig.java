@@ -29,7 +29,7 @@ public class KafkaConfig {
     public Producer nextProducer() {
 
         NextKafkaProducer nextKafkaProducer = new NextKafkaProducer();
-        nextKafkaProducer.init(this.nextKafkaProperties.getProducer().buildProperties());
+        nextKafkaProducer.init(this.nextKafkaProperties.getProducer().buildProperties(null));
 
         return nextKafkaProducer;
     }
