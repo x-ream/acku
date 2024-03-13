@@ -1,8 +1,10 @@
 package io.xream.acku.remote.acku;
 
 import io.xream.acku.bean.entity.AckuMessage;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 
 import java.util.List;
@@ -15,16 +17,16 @@ import java.util.List;
 public interface FailedServiceRemote {
 
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @GetExchange(value = "/find")
     List<AckuMessage> findFailed();
 
-    @RequestMapping(value = "/find/{topic}", method = RequestMethod.GET)
-    List<AckuMessage> findFailedByTopic();
+    @GetExchange(value = "/find/{topic}")
+    List<AckuMessage> findFailedByTopic(@PathVariable("topic") String topic);
 
-    @RequestMapping(value = "/retryAll", method = RequestMethod.GET)
+    @GetExchange(value = "/retryAll")
     boolean retryAll();
 
-    @RequestMapping(value = "/retry/{messageId}", method = RequestMethod.GET)
-    boolean retry(String messageId);
+    @GetExchange(value = "/retry/{messageId}")
+    boolean retry(@PathVariable("messageId") String messageId);
 
 }

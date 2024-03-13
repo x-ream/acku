@@ -18,6 +18,7 @@ package io.xream.acku.remote;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 
 /**
@@ -26,6 +27,6 @@ import org.springframework.web.service.annotation.HttpExchange;
 @HttpExchange("http://${acku.dashboard.authorization.url.server}" )
 public interface AuthorizationServiceRemote {
 
-    @RequestMapping(value = "/{token}/{userId}", method = RequestMethod.GET)
+    @GetExchange(value = "/{token}/{userId}")
     boolean verify(String token, String userId);
 }

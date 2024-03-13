@@ -19,7 +19,9 @@ package io.xream.acku.remote;
 import io.xream.acku.bean.entity.AckuMessage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
+import org.springframework.web.service.annotation.PostExchange;
 
 import java.util.List;
 
@@ -30,18 +32,18 @@ import java.util.List;
 public interface ScheduledAckuServiceRemote {
 
 
-    @RequestMapping(value = "/retry")
+    @PostExchange(value = "/retry")
     boolean retry(AckuMessage message);
 
-    @RequestMapping(value = "/listForRetry", method = RequestMethod.GET)
+    @GetExchange(value = "/listForRetry")
     List<AckuMessage> listForRetry();
 
-    @RequestMapping(value = "/tryToFinish",method = RequestMethod.GET)
+    @GetExchange(value = "/tryToFinish")
     boolean tryToFinish();
 
-    @RequestMapping(value = "/tryToProduceNext",method = RequestMethod.GET)
+    @GetExchange(value = "/tryToProduceNext")
     boolean tryToProduceNext();
 
-    @RequestMapping(value = "/clean",method = RequestMethod.GET)
+    @GetExchange(value = "/clean")
     boolean clean();
 }
