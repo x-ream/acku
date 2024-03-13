@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Sim
  */
-@HttpExchange("http://${acku.app}/failed" )
+@HttpExchange("http://acku-app/failed" )
 public interface FailedServiceRemote {
 
 
