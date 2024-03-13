@@ -2,8 +2,6 @@ package io.xream.acku.remote.acku;
 
 import io.xream.acku.bean.entity.AckuMessage;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 

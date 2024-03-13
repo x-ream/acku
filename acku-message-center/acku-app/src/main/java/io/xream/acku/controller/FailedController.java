@@ -43,7 +43,7 @@ public class FailedController {
     }
 
     @RequestMapping(value = "/find/{topic}", method = RequestMethod.GET)
-    public List<Map<String,Object>> findFailedByTopic(@PathVariable String topic) {
+    public List<Map<String,Object>> findFailedByTopic(@PathVariable("topic") String topic) {
 
         QB.X builder = QB.x();
         builder.select("id","status","retryMax","topic").from(AckuMessage.class);
@@ -67,7 +67,7 @@ public class FailedController {
     }
 
     @RequestMapping(value = "/retry/{messageId}", method = RequestMethod.GET)
-    public boolean retry(@PathVariable String messageId){
+    public boolean retry(@PathVariable("messageId") String messageId){
 
         return this.failedService.refresh(
                 QrB.of(AckuMessage.class).refresh("status",MessageStatus.SEND)

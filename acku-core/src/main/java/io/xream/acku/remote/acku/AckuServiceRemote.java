@@ -19,7 +19,6 @@ package io.xream.acku.remote.acku;
 import io.xream.acku.bean.dto.AckuDto;
 import io.xream.acku.bean.dto.ConsumedAckuDto;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
 
@@ -27,7 +26,7 @@ import org.springframework.web.service.annotation.PostExchange;
 /**
  * @author Sim
  */
-@HttpExchange("http://${acku.app}/message" )
+@HttpExchange("http://acku-app/message" )
 public interface AckuServiceRemote {
 
     @PostExchange("/create")
@@ -40,9 +39,9 @@ public interface AckuServiceRemote {
     boolean consume(@RequestBody ConsumedAckuDto dto);
 
     @PostExchange("/tryToConfirm")
-    boolean tryToConfirm(String msgId);
+    boolean tryToConfirm(@RequestBody String msgId);
 
     @PostExchange("/cancel")
-    boolean cancel(String msgId);
+    boolean cancel(@RequestBody String msgId);
 
 }

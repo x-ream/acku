@@ -24,7 +24,7 @@ import org.springframework.web.service.annotation.HttpExchange;
 /**
  * @author Sim
  */
-@HttpExchange("http://${acku.dashboard.authorization.url.server}" )
+@HttpExchange("${acku.dashboard.authorization.url.server}" )
 public interface AuthorizationServiceRemote {
 
     @GetExchange(value = "/{token}/{userId}")
